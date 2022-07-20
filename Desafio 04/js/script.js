@@ -1,10 +1,27 @@
-/*El docente puede cargar los datos (nombre / apellido / DNI / nota1 / nota2 / nota3) de todos sus alumnos. Luego el codigo calcula el promedio de cada alumno. Adema el docente puede "interactuar" con nuestro codigo para realizar consultas en los arrays. PD: el codigo cuenta con ciclos de validacion de datos para las notas.*/
+/*El docente podra utilizar este sitio web SUGD: Sistema Unico de Gestion Docente para poder llevar un registro del Historial Academico de sus alumnos segun: comision o materia.
+Para ello debera completar 3 bloques:
+Bloque 01: datos generales del docente y de la asignatura / comision.
+Bloque 02: datos generales del alumno.
+Bloque 03: notas alcanzadas por el alumno. Informe de situacion final.
+*/
+
+/*=======================================================================*/
+
+class Docente{
+    constructor(nombreDocente = " ", emailDocente = " ", asignatura = " ", comision = " "){
+        this.nombreDocente = nombreDocente
+        this.emailDocente = emailDocente
+        this.asignatura = asignatura
+        this.comision = comision
+    }
+}
 
 class Alumno {
-    constructor(nombre = " ", apellido = " ", dni = 1, nota1 = 1, nota2 = 1, nota3 = 1, promedio = 1) {
-        this.nombre = nombre
-        this.apellido = apellido
+    constructor(nombreAlumno = " ", emailAlumno = " ", fechaNacimiento = " ", dni = 1, nota1 = 1, nota2 = 1, nota3 = 1, promedio = 1) {
+        this.nombreAlumno = nombreAlumno
         this.dni = dni
+        this.emailAlumno = emailAlumno
+        this.fechaNacimiento = fechaNacimiento
         this.nota1 = nota1
         this.nota2 = nota2
         this.nota3 = nota3
@@ -21,64 +38,22 @@ function prom_estu(not1, not2, not3) {
     return promedio
 }
 
-function buscarAlumnoNombre(alumnos){
-    let nombreAlumno = prompt("Ingrese el nombre del alumno")
-    let alumnoBuscadoNombre = alumnos.find(alumno => alumno.nombre == nombreAlumno)
-    if (alumnoBuscadoNombre == undefined){
-        alert("Alumno no encontrado")
-    }else{
-        console.log(alumnoBuscadoNombre)
-    }
-}
-function buscarAlumnoApellido(alumnos){
-    let apellidoAlumno = prompt("Ingrese el apellido del alumno")
-    let alumnoBuscadoApellido = alumnos.find(alumno => alumno.apellido == apellidoAlumno)
-    if (alumnoBuscadoApellido == undefined){
-        alert("Alumno no encontrado")
-    }else{
-        console.log(alumnoBuscadoApellido)
-    }
-}
-function buscarAlumnoDNI(alumnos) {
-    let DNIAlumno = parseInt(prompt("Ingrese el DNI del alumno"))
-    let alumnoBuscadoDNI = alumnos.find(alumno => alumno.DNI == DNIAlumno)
-    if (alumnoBuscadoDNI == undefined){
-        alert("Alumno no encontrado")
-    }else{
-        console.log(alumnoBuscadoDNI)
-    }
-}
-
 /*=======================================================================*/
 
 const alumnos = []
-let nombre, dni, nota1, nota2, nota3, promedio, continua
+let nombreAlumno, dni, nota1, nota2, nota3, promedio, continua
 
-//El docente debe ingresar los datos de sus alumnos: Nombre y Apellido + DNI + Nota1 + Nota2 + Nota3. El promedio se calcula usando una funcion.
+//El docente debe ingresar los datos de sus alumnos: Nombre y Apellido + DNI + EMAIL + Fecha de Nacimiento + Nota1 + Nota2 + Nota3. El promedio se calcula usando una funcion.
 
 do {
-    let nombre = prompt("Ingrese el nombre del alumno").toLocaleLowerCase()
-    let apellido = prompt("Ingrese el apellido del alumno").toLocaleLowerCase()
-    let dni = parseInt(prompt("Ingrese el DNI del alumno"));
-
-    //Cada nota ingresada debe ser VALIDA; por eso aplico while para controlar / revisar el valor ingresado.
-
-    let nota1 = parseInt(prompt("Ingrese la Nota 01. Recuerde que debe ser entre 0 y 10"));
-    while ((nota1 < 0) || (nota1 > 10)) {
-        console.log("La nota ingresada es INVALIDA")
-        nota1 = parseInt(prompt("Ingrese la Nota 01. Recuerde que debe ser entre 0 y 10"));
-    }
-    let nota2 = parseInt(prompt("Ingrese la Nota 02. Recuerde que debe ser entre 0 y 10"));
-    while ((nota2 < 0) || (nota2 > 10)) {
-        console.log("La nota ingresada es INVALIDA")
-        nota2 = parseInt(prompt("Ingrese la Nota 02. Recuerde que debe ser entre 0 y 10"));
-    }
-    let nota3 = parseInt(prompt("Ingrese la Nota 03. Recuerde que debe ser entre 0 y 10"));
-    while ((nota3 < 0) || (nota3 > 10)) {
-        console.log("La nota ingresada es INVALIDA")
-        nota3 = parseInt(prompt("Ingrese la Nota 03. Recuerde que debe ser entre 0 y 10"));
-    }
-    let promedio = prom_estu(nota1, nota2, nota3)
+    let nombreAlumno = document.getElementById("nombreAlumno").value
+    let dni = document.getElementById("dni").value
+    let emailAlumno = document.getElementById("emailAlumno").value
+    let fechaNacimiento = document.getElementById("fechaNacimiento").value
+    let nota1 = document.getElementById("nota1").value
+    let nota2 = document.getElementById("nota2").value
+    let nota3 = document.getElementById("nota3").value
+    let promedio = prom_estu(nota1, nota2, nota3).value
     continua = prompt("¿Desea ingresar los datos de un nuevo alumno?").toLocaleLowerCase()
 } while (continua != "no")
 
@@ -86,31 +61,18 @@ console.log(alumnos)
 
 /*=======================================================================*/
 
-//Menu para interactuar con el docente... puede elegir 3 opciones validas para trabajar con los arrays
+const docentes = []
+let nombreDocente, emailDocente, asignatura, comision, continua2
 
-let respuesta
+//El docente debe ingresar sus datos basicos: nombre y apellido + email + asignatura + comision.
 
 do {
-    respuesta = parseInt(prompt(`Ingrese numero para:
-        1- Buscar alumno por Nombre
-        2- Buscar alumno por Apellido
-        3- Buscar alumno por DNI
-    `))
-} while (respuesta < 1 || respuesta > 4)
+    let nombreDocente = document.getElementById("nombreDocente").value
+    let emailAlumno = document.getElementById("emailDocente").value
+    let dni = document.getElementById("asignatura").value
+    let fechaNacimiento = document.getElementById("comision").value
+} while (continua2 != "no")
 
-switch (respuesta) {
-    case 1:
-        buscarAlumnoNombre(alumnos)
-        break
-    case 2:
-        buscarAlumnoApellido(alumnos)
-        break
-    case 3:
-        buscarAlumnoDNI(alumnos)
-        break
-    default:
-        alert("La opcion ingresada no es valida")
-        break
-}
+console.log(docentes)
 
 /*=======================================================================*/
