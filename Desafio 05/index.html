@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODERHOUSE | Curso JavaScript</title>
+</head>
+
+<body>
+    <div>
+        <h1 id="sugd">SUGD: Sistema Unico de Gestion Docente</h1>
+        <P>Sitio WEB dedicado a brindar soporte a docentes de nivel secundario y/o universitario</P>
+    </div>
+    <div>
+        <div class="registroDocente">
+            <h2>Datos Generales del Docente</h2>
+            <form>
+                <p>Nombre y Apellido del Docente</p>
+                <input type="text" name="nombreDocente" placeholder="Nombre del docente" id="nombreDocente">
+                <p>Email</p>
+                <input type="email" name="emailDocente" placeholder="Email del docente" id="emailDocente">
+                <p>Asignatura</p>
+                <form>
+                    <select name="asignaturas" id="asignatura">
+                        <option value="Matematica">Matematica</option>
+                        <option value="Ingles">Ingles</option>
+                        <option value="Lengua Castellana">Lengua Castellana</option>
+                        <option value="Historia">Historia</option>
+                    </select>
+                </form>
+                <p>Comision</p>
+                <input type="number" name="comision" placeholder="Numero de comision" id="comision">
+            </form>
+        </div>
+        <div class="registroAlumno">
+            <h2>Datos Generales del Alumno</h2>
+            <form>
+                <p>Nombre y Apellido del Alumno</p>
+                <input type="text" name="alumno" placeholder="Nombre del alumno" id="nombreAlumno">
+                <p>DNI</p>
+                <input type="number" name="dni" placeholder="DNI" id="dni">
+                <p>Email</p>
+                <input type="email" name="emailAlumno" placeholder="Email del alumno" id="emailAlumno">
+                <p>Fecha de Nacimiento</p>
+                <input type="number" name="fechaNacimiento" placeholder="Fecha de nacimiento" id="fechaNacimiento">
+            </form>
+        </div>
+        <div class="rendimientoAlumno">
+            <h2>Historial Academico</h2>
+            <p>Nota 1</p>
+            <input type="number" name="nota1" placeholder="Nota 1" id="nota1">
+            <p>Nota 2</p>
+            <input type="number" name="nota2" placeholder="Nota 2" id="nota2">
+            <p>Nota 3</p>
+            <input type="number" name="nota3" placeholder="Nota 3" id="nota3">
+            <p>Comentarios del Docente</p>
+            <textarea name="registroDocente" id="" cols="60" rows="5"></textarea>
+        </div>
+        <form>
+            <p>¿Has terminado?</p>
+            <input type="submit" value="Enviar registro">
+            <input type="reset" value="Limpiar formulario">
+            <input type="button" value="Exportar en EXCEL">
+        </form>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
