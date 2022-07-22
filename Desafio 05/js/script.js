@@ -6,6 +6,25 @@ Bloque 03: notas alcanzadas por el alumno. Informe de situacion final.
 */
 
 /*=======================================================================*/
+//Asociacion de eventos
+
+const botonEnviar = document.getElementById("botonEnviar")
+botonEnviar.addEventListener("click", () => {
+    console.log("Registro completo!")
+})
+
+const botonLimpiar = document.getElementById("botonLimpiar")
+botonLimpiar.addEventListener("click", () => {
+    console.log("Limpieza de formulario completada.")
+})
+
+const exportarExcel = document.getElementById("exportarExcel")
+exportarExcel.addEventListener("click", () => {
+    console.log("Export to Excel!")
+})
+
+
+/*=======================================================================*/
 
 class Docente{
     constructor(nombreDocente = " ", emailDocente = " ", asignatura = " ", comision = " "){
@@ -30,7 +49,6 @@ class Alumno {
 }
 
 /*=======================================================================*/
-
 //Funciones
 
 function prom_estu(not1, not2, not3) {
@@ -39,20 +57,36 @@ function prom_estu(not1, not2, not3) {
 }
 
 /*=======================================================================*/
+//El docente debe ingresar los datos de sus alumnos: Nombre y Apellido + DNI + EMAIL + Fecha de Nacimiento + Nota1 + Nota2 + Nota3. El promedio se calcula usando una funcion.
 
 const alumnos = []
 let nombreAlumno, dni, nota1, nota2, nota3, promedio, continua
 
-//El docente debe ingresar los datos de sus alumnos: Nombre y Apellido + DNI + EMAIL + Fecha de Nacimiento + Nota1 + Nota2 + Nota3. El promedio se calcula usando una funcion.
-
 do {
-    let nombreAlumno = document.getElementById("nombreAlumno").value
-    let dni = document.getElementById("dni").value
-    let emailAlumno = document.getElementById("emailAlumno").value
-    let fechaNacimiento = document.getElementById("fechaNacimiento").value
-    let nota1 = document.getElementById("nota1").value
-    let nota2 = document.getElementById("nota2").value
-    let nota3 = document.getElementById("nota3").value
+    let nombreAlumno = document.getElementById("nombreAlumno")
+    nombreAlumno.addEventListener("input", () => {
+        console.log(nombreAlumno.value)
+    })
+    let emailAlumno = document.getElementById("emailAlumno")
+    emailAlumno.addEventListener("input", () => {
+        console.log(emailAlumno.value)
+    })
+    let fechaNacimiento = document.getElementById("fechaNacimiento")
+    fechaNacimiento.addEventListener("input", () => {
+        console.log(fechaNacimiento.value)
+    })
+    let nota1 = document.getElementById("nota1")
+    nota1.addEventListener("input", () => {
+        console.log(nota1.value)
+    })
+    let nota2 = document.getElementById("nota2")
+    nota2.addEventListener("input", () => {
+        console.log(nota2.value)
+    })
+    let nota3 = document.getElementById("nota3")
+    nota3.addEventListener("input", () => {
+        console.log(nota3.value)
+    })
     let promedio = prom_estu(nota1, nota2, nota3).value
     continua = prompt("¿Desea ingresar los datos de un nuevo alumno?").toLocaleLowerCase()
 } while (continua != "no")
@@ -60,19 +94,25 @@ do {
 console.log(alumnos)
 
 /*=======================================================================*/
+//El docente debe ingresar sus datos basicos: nombre y apellido + email + asignatura + comision.
 
 const docentes = []
 let nombreDocente, emailDocente, asignatura, comision, continua2
 
-//El docente debe ingresar sus datos basicos: nombre y apellido + email + asignatura + comision.
-
 do {
-    let nombreDocente = document.getElementById("nombreDocente").value
-    let emailAlumno = document.getElementById("emailDocente").value
-    let dni = document.getElementById("asignatura").value
-    let fechaNacimiento = document.getElementById("comision").value
+    let nombreDocente = document.getElementById("nombreDocente")
+    nombreDocente.addEventListener("input", () => {
+        console.log(nombreDocente.value)
+    })
+    let emailDocente = document.getElementById("emailDocente")
+    emailDocente.addEventListener("input", () => {
+        console.log(emailDocente.value)
+    })
+    let comision = document.getElementById("comision")
+    comision.addEventListener("input", () => {
+        console.log(comision.value)
+    })
 } while (continua2 != "no")
 
 console.log(docentes)
 
-/*=======================================================================*/
