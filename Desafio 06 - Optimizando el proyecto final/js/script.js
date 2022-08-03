@@ -1,89 +1,96 @@
-/*
-Sitio Web de SUGD >>> Sistema Unico de Gestion Docente.
-Un docente de nivel secundario / universitario o de un curso X puede usar este sitio.
+/*El siguiente codigo tiene como objetivo establecer la comparacion entre la metodologia estandar y la metodologia abreviada de escribir codigo en JS*/
 
-Objetivo: registro de notas y emision de informe individual o por comision.
-El docente debe completar 3 bloques:
-BLOQUE 01: cargar en sitio datos basicos del docente tales como: NOMBRE-APELLIDO / EMAIL / UNIVERSIDAD o INSTITUCION / ASIGNATURA / COMISION
-BLOQUE 02: cargar en sitio datos basicos del alumno tales como: NOMBRE-APELLIDO / EMAIL / FECHA DE NACIMIENTO / DNI
-BLOQUE 03: carga de datos academicos del alumno y status final: NOTA 1 / NOTA 2 / NOTA 3 / PROMEDIO / CONDICION FINAL / COMENTARIOS DEL DOCENTE
-*/
 
-/*========================== OPCION A ==========================*/
+//Todos estos metodos seran tenidos en cuenta / aplicados en mi proyecto final
 
-//Creacion de clase
+//=====================================================================
 
-class Registro{
-    constructor (nombreDocente, emailDocente, institucion, asignatura, comision, nombreAlumno, emailAlumno, fechaDeNacimientoAlumno, dni, nota1, nota2, nota3, comentarios) {
-        this.nombreDocente = nombreDocente
-        this.emailDocente = emailDocente
-        this.institucion = institucion
-        this.asignatura = asignatura
-        this.comision = comision
-        this.nombreAlumno = nombreAlumno
-        this.emailAlumno = emailAlumno
-        this.fechaDeNacimientoAlumno = fechaDeNacimientoAlumno
-        this.dni = dni
-        this.nota1 = nota1
-        this.nota2 = nota2
-        this.nota3 = nota3
-        this.comentarios = comentarios
-    }
+//Operador ++ (funciona tambien con --)
 
-    //Formula promedio
+console.log("Metodo i = i + 1");
 
-    calculoPromedio(){
-        let promedio = ((this.nota1 + this.nota2 + this.nota3) / 3)
-        return promedio
-    }
+for (let i = 0; i < 5; i = i + 1){
+    console.log("El numero mostrado es: " + i);
 }
 
-//Creacion de arrays
+//Se reemplaza i = i + 1 >>>>> i++ 
+//De esta forma se incrementa en 1 la variable i
 
-const registros = []
+console.log("Metodo i++");
 
-//Los datos de mi array seran tomados directamente desde el formulario + eventos del boton
-
-const idFormulario = document.getElementById('formulario')
-
-idFormulario.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const nombreDocente = document.getElementById('nombreDocente').value;
-    const emailDocente = document.getElementById('emailDocente').value;
-    const institucion = document.getElementById('institucion').value;
-    const asignatura = document.getElementById('asignatura').value;
-    const comision = document.getElementById('comision').value;
-    const nombreAlumno = document.getElementById('nombreAlumno').value;
-    const emailAlumno = document.getElementById('emailAlumno').value;
-    const fechaDeNacimientoAlumno = document.getElementById('fechaDeNacimientoAlumno').value;
-    const dni = document.getElementById('dni').value;
-    const nota1 = document.getElementById('nota1').value;
-    const nota2 = document.getElementById('nota2').value;
-    const nota3 = document.getElementById('nota3').value;
-    const comentarios = document.getElementById('comentarios').value;
-
-    //Creacion de registro
-    const registro = new Registro (nombreDocente, emailDocente, institucion, asignatura, comision, nombreAlumno, emailAlumno, fechaDeNacimientoAlumno, dni, nota1, nota2, nota3, comentarios);
-
-    //Agregamos los datos en el array
-    registros.push(registro);
-
-    //Guardamos los datos en el localStorage. 
-    localStorage.setItem('Registro', JSON.stringify(registros));
-
-    //Limpiamos el formulario
-    idFormulario.reset();
-
-    //Muestro el resultado con la siguiente función: 
-    mostrarInfo(registro);
-})
-
-const resultado = document.getElementById('infoUsuarios');
-
-const mostrarInfo = (registro) => {
-    let aux = '';
-    aux += `<p class="resultado"> ${registro.nombreAlumno} tu condicion final es: </p>
-            <p class="resultado"> Nota Promedio: ${registro.calculoPromedio()} </p>`;
-    resultado.innerHTML = aux;
+for (let i = 0; i < 5; i++){
+    console.log("El numero mostrado es: " + i);
 }
 
+//=====================================================================
+
+//Operador ternario: forma abreviada de escribir IF - ELSE
+
+let temperatura = 39 //Este valor lo pongo constante pero podria ser ingresado por teclado o completado en un formulario. O quizas tambien calculado o medido.
+
+if (temperatura > 39) {
+    console.log("La temperatura del motor es optima");
+} else {
+    console.log("La temperatura del motor es muy baja. Por favor, espere a que aumente la temperatura para comenzar a mover el VEH");
+}
+
+//Se reemplaza la estructura IF - ELSE por ? : ;
+
+temperatura > 39 ? console.log("La temperatura del motor es optima") : console.log("La temperatura del motor es muy baja. Por favor, espere a que aumente la temperatura para comenzar a mover el VEH")
+
+//=====================================================================
+
+//Operador logico: AND
+
+const informeAlumno = []
+
+if (informeAlumno.length === 0) {
+  console.log("El docente no ha cargado la informacion de ningun alumno")
+}
+
+// Reemplazo estructura IF simple (sin ELSE) por un operador AND
+
+informeAlumno.length === 0 && console.log("El carrito está vacío!")
+
+//=====================================================================
+
+//Operador logico: OR
+
+const alumno1 = {
+    nombre: "Juan FENOGLIO",
+    nota1: 10,
+    nota2: 10,
+    nota: 10
+}
+const alumno2 = null
+  
+console.log( alumno1 || "El docente aun no ha cargado los datos del alumno")
+
+console.log( alumno2 || "El docente aun no ha cargado los datos del alumno")
+
+//=====================================================================
+
+//Operador NULLISH COALESCING >>> igual que OR pero mas "flexible" porque admite mas valores que sean verdaderos (??)
+
+console.log( 7 ?? "Nullish")  // Comprobacion con numero
+console.log( null ?? "Nullish")  // Comprobacion con null // Nullish
+console.log( "Curso de JAVASCRIPT en CODERHOUSE" ?? "Nullish")  // Comprobacion con cadena
+console.log( "" ?? "Nullish")  // Comprobacion con vacio ""
+console.log( NaN ?? "Nullish")  // Comprobacion con NaN
+console.log( true ?? "Nullish")  // Comprobacion con tipo de texto booleano - true
+console.log( false ?? "Nullish")  // Comprobacion con tipo de texto booleano - falso
+
+//=====================================================================
+
+//Acceso condicional a un objeto (?) >>> nos permite "salvar" un error.
+
+const usuario = null
+
+console.log( usuario.nombre || "El usuario no existe" ) // Error: "No se pueden leer propiedades de NULL"
+
+console.log( usuario?.nombre || "El usuario no existe") // "El usuario no existe"
+
+
+//=====================================================================
+
+//Los demas operadores avanzados los he implementados ya en mi PROYECTO FINAL >>> check carpeta ENTREGA PROYECTO FINAL N° 2
