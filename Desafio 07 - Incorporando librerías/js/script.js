@@ -87,6 +87,8 @@ const mostrarInfo = (registro) => {
     resultado.innerHTML = aux;
 }
 
+//Incorporacion de libreria SweetAlert2
+
 const informesPrivados = document.getElementById("informesPrivados")
 informesPrivados.addEventListener('click', () => {
     Swal.fire({
