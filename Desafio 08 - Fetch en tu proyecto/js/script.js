@@ -27,8 +27,13 @@ class Registro{
         this.nota1 = nota1
         this.nota2 = nota2
         this.nota3 = nota3
-        this.promedio = ((this.nota1 + this.nota2 + this.nota3) / 3)
         this.comentarios = comentarios
+    }
+
+    //Formula promedio
+
+    calculoPromedio(){
+        return ((this.nota1 + this.nota2 + this.nota3) / 3)
     }
 }
 
@@ -75,8 +80,45 @@ idFormulario.addEventListener('submit', (e) => {
 const resultado = document.getElementById('infoUsuarios');
 
 const mostrarInfo = (registro) => {
+    let promedio = ((registro.nota1 + registro.nota2 + registro.nota3) / 3)
     let aux = '';
     aux += `<p class="resultado"> ${registro.nombreAlumno} tu condicion final es: </p>
-            <p class="resultado"> Nota Promedio: ${registro.promedio} </p>`;
+            <p class="resultado"> Nota Promedio: ${promedio} </p>`;
     resultado.innerHTML = aux;
 }
+
+//Incorporacion de libreria SweetAlert2
+
+const informesPrivados = document.getElementById("informesPrivados")
+informesPrivados.addEventListener('click', () => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Acceso Restringido',
+        text: 'Usted debe iniciar sesion para poder realizar consultas sobre informes'
+      })
+})
+
+//AJAX & Fetch
+
+const idBusquedaLibro = document.getElementById('busquedaLibro') 
+const nombreLibro = document.getElementById('nombreLibro').value;
+
+fetch(`https://www.etnassoft.com/api/v1/get/?book_title=${nombreLibro}`)
+.then(response => response.json())
+.then(data => console.log(data))
+
+fetch(`https://www.etnassoft.com/api/v1/get/?book_title=${nombreLibro}`)
+.then(response => response.json())
+.then(data => {
+    let {title, author, content, language, url_dowload} = data[0]
+
+    let aux2 = '';
+    aux2 += `<p class="resultadoBusquedaLibro"> ${title}</p>
+            <p class="resultadoBusquedaLibro"> ${author}</p>
+            <p class="resultadoBusquedaLibro"> ${content}</p>
+            <p class="resultadoBusquedaLibro"> ${language}</p>
+            <p class="resultadoBusquedaLibro"> ${url_dowload}</p>`;
+    resultado.innerHTML = aux2;
+})
+
+

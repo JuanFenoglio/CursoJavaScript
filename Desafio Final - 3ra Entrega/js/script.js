@@ -32,3 +32,28 @@ Control de Condicion Final >>> VALIDACION
 
 */
 
+//Constructor de objeto registro de alumno
+
+class Registro{
+        constructor (nombreDocente, emailDocente, institucion, asignatura, comision, nombreAlumno, emailAlumno, fechaDeNacimientoAlumno, dni, nota1 = 0, nota2 = 0, nota3 = 0, comentarios) {
+        this.nombreDocente = nombreDocente;
+        this.emailDocente = emailDocente;
+        this.institucion = institucion;
+        this.asignatura = asignatura;
+        this.comision = comision;
+        this.nombreAlumno = nombreAlumno;
+        this.emailAlumno = emailAlumno;
+        this.fechaDeNacimientoAlumno = fechaDeNacimientoAlumno;
+        this.dni = dni;
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.nota3 = nota3;
+        this.promedio = ((this.nota1 + this.nota2 + this.nota3) / 3)
+        this.comentarios = comentarios;
+}
+}
+
+const alumno1 = new Registro("Pedro", "hola", "", "", "", "Juan", "", "", "", 9, 9, 8, "EXCELENTE ALUMNO!" )
+
+console.log(alumno1.promedio)
+console.log(alumno1)

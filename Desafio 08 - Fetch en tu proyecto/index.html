@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUGD: Sistm. Unico Gestion Docente</title>
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <!-- BOOTSTRAP 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fondoNavbar " aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img class="tamLogo" src="" alt="SUGD"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+                aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link  fw-bold" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="#">Informe Academico</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold">Asistencia</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="px-4 py-5 text-center fondo">
+        <h1 class="display-5 fw-bold">SUGD: Sistema Unico de Gestion Docente</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Sitio web dedicado a dar soporte a docentes terciarios / universitarios / inst.
+                privados</p>
+        </div>
+    </div>
+
+    <article>
+        <div class="row my-4">
+            <h2 class="text-center">Informe Academico</h2>
+            <form class="col-xl-6 col-md-12" id="formulario">
+                <div>
+                    <h3>Informacion Docente</h3>
+                </div>
+                <div>
+                    <label for="nombreDocente" class="form-label subtitulos">Nombre y Apellido</label>
+                    <input type="text" class="form-control" id="nombreDocente" required>
+                    <label for="emailDocente" class="form-label subtitulos">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="emailDocente" required>
+                    <label for="institucion" class="form-label subtitulos">Intitucion</label>
+                    <input type="text" class="form-control" id="institucion" required>
+                    <label for="asignatura" class="form-label subtitulos">Asignatura</label>
+                    <input type="text" class="form-control" id="asignatura" required>
+                    <label for="comision" class="form-label subtitulos">Comision</label>
+                    <input type="number" class="form-control" id="comision" required>
+                </div>
+                <div>
+                    <h3>Informacion Alumno</h3>
+                </div>
+                <div>
+                    <label for="nombreAlumno" class="form-label subtitulos">Nombre y Apellido</label>
+                    <input type="text" class="form-control" id="nombreAlumno" required>
+                    <label for="emailAlumno" class="form-label subtitulos">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="emailAlumno" required>
+                    <label for="fechaDeNacimientoAlumno" class="form-label subtitulos">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" id="fechaDeNacimientoAlumno" required>
+                    <label for="dni" class="form-label subtitulos">DNI</label>
+                    <input type="number" class="form-control" id="dni" required>
+                </div>
+                <div>
+                    <h3>Desempeño Academico</h3>
+                </div>
+                <div>
+                    <label for="nota1" class="form-label subtitulos">Nota 1</label>
+                    <input type="number" class="form-control" id="nota1">
+                    <label for="nota2" class="form-label subtitulos">Nota 2</label>
+                    <input type="number" class="form-control" id="nota2">
+                    <label for="nota3" class="form-label subtitulos">Nota 3</label>
+                    <input type="number" class="form-control" id="nota3">
+                    <label for="comentarios" class="form-label subtitulos">Comentarios del Docente</label>
+                    <input type="text" class="form-control" id="comentarios">
+                </div>
+                <div>
+                    <button type="submit" class="btn colorBoton my-2">Calcular</button>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center" id="infoUsuarios"></div>
+        </div>
+        <button id="informesPrivados">Generar Informe</button>
+        <div class="row">
+            <div id="datosAdmin"></div>
+        </div>
+    </article>
+    <footer>
+    <h3>¿Tenes dudas sobre algun tema? ¿Estas buscando un libro puntual sobre la asignatura?</h3>
+    <form id="busquedaLibro">
+        <label for="nombreLibro" class="form-label subtitulos">Nombre del libro</label>
+        <input type="text" class="form-control" id="nombreLibro" required>
+        <button type="submit" class="btn colorBoton my-2">Buscar</button>
+    </form>
+    <div id="resultadoBusquedaLibro" class="resultadoBusquedaLibro">
+
+    </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.26/dist/sweetalert2.all.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
