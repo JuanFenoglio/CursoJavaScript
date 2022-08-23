@@ -81,8 +81,16 @@ const resultado = document.getElementById('infoUsuarios');
 
 const mostrarInfo = (registro) => {
     let promedio = ((registro.nota1 + registro.nota2 + registro.nota3) / 3)
+    let status = ""
+    if(promedio < 4){
+        status =  "DESAPROBADO"
+    }else if (promedio >= 4 && promedio < 7){
+        status = "REGULAR"
+    }else{
+        status = "PROMOCIONADO"
+    }
     let aux = '';
-    aux += `<p class="resultado"> ${registro.nombreAlumno} tu condicion final es: </p>
+    aux += `<p class="resultado"> Alumno: ${registro.nombreAlumno} >>> su condicion final es: ${status}</p>
             <p class="resultado"> Nota Promedio: ${promedio} </p>`;
     resultado.innerHTML = aux;
 }

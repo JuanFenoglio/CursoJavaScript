@@ -1,59 +1,132 @@
-/* SUGD: Sistema Unico de Gestion Docente
-
-Este sitio esta pensando para acercar la educacion secundaria a las nuevas tecnologias y que se genere una sinergia entre INSTITUCION - DOCENTES - ALUMNOS
-
-En la 1ra etapa del sitio se tiene como objetivo:
-A.- Docente carga notas e informacion adicional de sus alumnos y se emite un Informe academico.
-
-En la 2da etapa del sitio se tiene como objetivo:
-A.- Docente toma asistencia de su curso
-B.- Una vez que la etapa A se haya implementada de manera robusta, cambio a asistencia por QR.
-
-En la 3ra etapa del sitio se tiene como objetivo:
-A.- Carga de actividades a cada alumno
-B.- Control de frecuencia de visitas al sitio
-C.- Metricas para docente e institucion
-
-*/
-
 /*
-Control de Notas >>> VALIDACION
+Sitio Web de SUGD >>> Sistema Unico de Gestion Docente.
+Un docente de nivel secundario / universitario o de un curso X puede usar este sitio.
 
-1 a 5 > Desaprobado.
-6 o 7 > Aprobado: Bien.
-8 o 9 > Aprobado: Muy bien.
-10 > Aprobado: Excelente.
-
-Control de Condicion Final >>> VALIDACION
-
-1 a 5: Libre.
-6 a 8: Regular.
-9 o 10: Promocionado.
-
+Objetivo: registro de notas y emision de informe individual o por comision.
+El docente debe completar 3 bloques:
+BLOQUE 01: cargar en sitio datos basicos del docente tales como: NOMBRE-APELLIDO / EMAIL / UNIVERSIDAD o INSTITUCION / ASIGNATURA / COMISION
+BLOQUE 02: cargar en sitio datos basicos del alumno tales como: NOMBRE-APELLIDO / EMAIL / FECHA DE NACIMIENTO / DNI
+BLOQUE 03: carga de datos academicos del alumno y status final: NOTA 1 / NOTA 2 / NOTA 3 / PROMEDIO / CONDICION FINAL / COMENTARIOS DEL DOCENTE
 */
 
-//Constructor de objeto registro de alumno
+/*========================== OPCION A ==========================*/
+
+//Creacion de clase
 
 class Registro{
-        constructor (nombreDocente, emailDocente, institucion, asignatura, comision, nombreAlumno, emailAlumno, fechaDeNacimientoAlumno, dni, nota1 = 0, nota2 = 0, nota3 = 0, comentarios) {
-        this.nombreDocente = nombreDocente;
-        this.emailDocente = emailDocente;
-        this.institucion = institucion;
-        this.asignatura = asignatura;
-        this.comision = comision;
-        this.nombreAlumno = nombreAlumno;
-        this.emailAlumno = emailAlumno;
-        this.fechaDeNacimientoAlumno = fechaDeNacimientoAlumno;
-        this.dni = dni;
-        this.nota1 = nota1;
-        this.nota2 = nota2;
-        this.nota3 = nota3;
-        this.promedio = ((this.nota1 + this.nota2 + this.nota3) / 3)
-        this.comentarios = comentarios;
-}
+    constructor (nombreDocente, emailDocente, institucion, asignatura, comision, nombreAlumno, emailAlumno, fechaDeNacimientoAlumno, dni, nota1, nota2, nota3, comentarios) {
+        this.nombreDocente = nombreDocente
+        this.emailDocente = emailDocente
+        this.institucion = institucion
+        this.asignatura = asignatura
+        this.comision = comision
+        this.nombreAlumno = nombreAlumno
+        this.emailAlumno = emailAlumno
+        this.fechaDeNacimientoAlumno = fechaDeNacimientoAlumno
+        this.dni = dni
+        this.nota1 = nota1
+        this.nota2 = nota2
+        this.nota3 = nota3
+        this.comentarios = comentarios
+    }
+
+    //Formula promedio
+
+    calculoPromedio(){
+        return ((this.nota1 + this.nota2 + this.nota3) / 3)
+    }
 }
 
-const alumno1 = new Registro("Pedro", "hola", "", "", "", "Juan", "", "", "", 9, 9, 8, "EXCELENTE ALUMNO!" )
+//Creacion de arrays
 
-console.log(alumno1.promedio)
-console.log(alumno1)
+const registros = []
+
+//Los datos de mi array seran tomados directamente desde el formulario + eventos del boton
+
+const idFormulario = document.getElementById('formulario')
+
+idFormulario.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombreDocente = document.getElementById('nombreDocente').value;
+    const emailDocente = document.getElementById('emailDocente').value;
+    const institucion = document.getElementById('institucion').value;
+    const asignatura = document.getElementById('asignatura').value;
+    const comision = document.getElementById('comision').value;
+    const nombreAlumno = document.getElementById('nombreAlumno').value;
+    const emailAlumno = document.getElementById('emailAlumno').value;
+    const fechaDeNacimientoAlumno = document.getElementById('fechaDeNacimientoAlumno').value;
+    const dni = document.getElementById('dni').value;
+    const nota1 = document.getElementById('nota1').value;
+    const nota2 = document.getElementById('nota2').value;
+    const nota3 = document.getElementById('nota3').value;
+    const comentarios = document.getElementById('comentarios').value;
+
+    //Creacion de registro
+    const registro = new Registro (nombreDocente, emailDocente, institucion, asignatura, comision, nombreAlumno, emailAlumno, fechaDeNacimientoAlumno, dni, nota1, nota2, nota3, comentarios);
+
+    //Agregamos los datos en el array
+    registros.push(registro);
+
+    //Guardamos los datos en el localStorage. 
+    localStorage.setItem('Registro', JSON.stringify(registros));
+
+    //Limpiamos el formulario
+    idFormulario.reset();
+
+    //Muestro el resultado con la siguiente función: 
+    mostrarInfo(registro);
+})
+
+const resultado = document.getElementById('infoUsuarios');
+
+const mostrarInfo = (registro) => {
+    let promedio = ((registro.nota1 + registro.nota2 + registro.nota3) / 3)
+    let status = ""
+    if(promedio < 4){
+        status =  "DESAPROBADO"
+    }else if (promedio >= 4 && promedio < 7){
+        status = "REGULAR"
+    }else{
+        status = "PROMOCIONADO"
+    }
+    let aux = '';
+    aux += `<p class="resultado"> Alumno: ${registro.nombreAlumno} >>> su condicion final es: ${status}</p>
+            <p class="resultado"> Nota Promedio: ${promedio} </p>`;
+    resultado.innerHTML = aux;
+}
+
+//Incorporacion de libreria SweetAlert2
+
+const informesPrivados = document.getElementById("informesPrivados")
+informesPrivados.addEventListener('click', () => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Acceso Restringido',
+        text: 'Usted debe iniciar sesion para poder realizar consultas sobre informes'
+      })
+})
+
+//AJAX & Fetch
+
+const idBusquedaLibro = document.getElementById('busquedaLibro') 
+const nombreLibro = document.getElementById('nombreLibro').value;
+
+fetch(`https://www.etnassoft.com/api/v1/get/?book_title=${nombreLibro}`)
+.then(response => response.json())
+.then(data => console.log(data))
+
+fetch(`https://www.etnassoft.com/api/v1/get/?book_title=${nombreLibro}`)
+.then(response => response.json())
+.then(data => {
+    let {title, author, content, language, url_dowload} = data[0]
+
+    let aux2 = '';
+    aux2 += `<p class="resultadoBusquedaLibro"> ${title}</p>
+            <p class="resultadoBusquedaLibro"> ${author}</p>
+            <p class="resultadoBusquedaLibro"> ${content}</p>
+            <p class="resultadoBusquedaLibro"> ${language}</p>
+            <p class="resultadoBusquedaLibro"> ${url_dowload}</p>`;
+    resultado.innerHTML = aux2;
+})
+
+
